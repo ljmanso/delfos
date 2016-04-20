@@ -26,13 +26,13 @@
 
 
 
-
-
 #ifndef SPECIFICWORKER_H
 #define SPECIFICWORKER_H
 
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
+
+#include "delfos.h"
 
 class SpecificWorker : public GenericWorker
 {
@@ -52,10 +52,11 @@ public:
 	void setSpeedBase(const float advx, const float advz, const float rot);
 
 public slots:
-	void compute(); 	
+	void compute();
+
 
 private:
-	
+	Delfos *delfos;
 };
 
 #endif

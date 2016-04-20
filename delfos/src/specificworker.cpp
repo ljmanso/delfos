@@ -23,7 +23,7 @@
 */
 SpecificWorker::SpecificWorker(MapPrx& mprx) : GenericWorker(mprx)
 {
-
+	delfos = new Delfos();
 }
 
 /**
@@ -31,33 +31,18 @@ SpecificWorker::SpecificWorker(MapPrx& mprx) : GenericWorker(mprx)
 */
 SpecificWorker::~SpecificWorker()
 {
-	
+	delete delfos;
 }
 
 bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {
-
-
-
-	
 	timer.start(Period);
-	
-
 	return true;
 }
 
 void SpecificWorker::compute()
 {
-// 	try
-// 	{
-// 		camera_proxy->getYImage(0,img, cState, bState);
-// 		memcpy(image_gray.data, &img[0], m_width*m_height*sizeof(uchar));
-// 		searchTags(image_gray);
-// 	}
-// 	catch(const Ice::Exception &e)
-// 	{
-// 		std::cout << "Error reading from Camera" << e << std::endl;
-// 	}
+	
 }
 
 
@@ -98,7 +83,7 @@ void SpecificWorker::stopBase()
 
 void SpecificWorker::setSpeedBase(const float advx, const float advz, const float rot)
 {
-
+	delfos->setVelocity(advx, advz, rot);
 }
 
 

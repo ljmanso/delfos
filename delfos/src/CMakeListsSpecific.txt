@@ -3,6 +3,8 @@
 SET ( SOURCES
   specificworker.cpp
   specificmonitor.cpp
+  delfos.cpp
+  RoboteqDevice.cpp
 )
 
 # Headers set
