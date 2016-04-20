@@ -26,6 +26,9 @@ void Delfos::setVelocity(float LR, float FR, float VTheta)
 {
 	float wheelPermimeter = 2.*M_PI_2*76.2 // 76.2 it's the wheels' radius
 	
+	LR /= wheelPermimeter;
+	FR /= wheelPermimeter;
+
 	QMutexLocker l(mutex);
 
 	AUX_VD = sqrt(LR * LR + FR * FR);// ' sqrt returns result * 1000
