@@ -6,9 +6,9 @@ Delfos::Delfos()
 {
     mutex = new QMutex(QMutex::Recursive);
     string response = "";
-    status = device.Connect("/dev/ttyACM0");
+    status = device.Connect("/dev/ttyUSB0");
 
-    if(status != RQ_SUCCESS)
+    if (status != RQ_SUCCESS)
     {
         cout<<"Error connecting to device: "<<status<<"."<<endl;
         throw 1;

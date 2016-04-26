@@ -88,15 +88,15 @@ void SpecificMonitor::readConfig(RoboCompCommonBehavior::ParameterList &params )
 	RoboCompCommonBehavior::Parameter aux;
 
 	aux.editable = true;
-	configGetString("", "DelfosBase.WheelRadius", aux.value, "20.");
+	configGetString("", "DelfosBase.WheelRadius", aux.value, "76.2");
 	params["DelfosBase.WheelRadius"] = aux;
 
 	aux.editable = true;
-	configGetString("", "DelfosBase.DistAxes", aux.value, "120.");
+	configGetString("", "DelfosBase.DistAxes", aux.value, "380.");
 	params["DelfosBase.DistAxes"] = aux;
 
 	aux.editable = true;
-	configGetString("", "DelfosBase.AxesLength", aux.value, "120.");
+	configGetString("", "DelfosBase.AxesLength", aux.value, "422.");
 	params["DelfosBase.AxesLength"] = aux;
 }
 

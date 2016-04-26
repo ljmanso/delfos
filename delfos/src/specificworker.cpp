@@ -66,7 +66,6 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 	R  = QString::fromStdString(params["DelfosBase.WheelRadius"].value).toFloat(); 
 	l1 = QString::fromStdString(params["DelfosBase.DistAxes"].value   ).toFloat();
 	l2 = QString::fromStdString(params["DelfosBase.AxesLength"].value ).toFloat();
-
 	printf("l1: %f\n", l1);
 	printf("l2: %f\n", l2);
 	printf("r:  %f\n", R);
@@ -113,6 +112,7 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 
 void SpecificWorker::compute()
 {
+	setWheels(wheelVels);
 	computeOdometry(false);
 }
 
@@ -242,7 +242,12 @@ void SpecificWorker::setSpeedBase(const float advx, const float advz, const floa
 
 void SpecificWorker::setWheels(QVec wheelVels_)
 {
-	delfos->setVelocity(wheelVels(0), wheelVels(1), wheelVels(2), wheelVels(3));
+	QMutexLocker locker(mutex);
+	wheelVels = wheelVels_;
+	double rps2rpm = 60./(2.*M_PI);
+	double encoderFactor = 71.0/8.0;
+	QVec f = wheelVels_.operator*(rps2rpm * encoderFactor);
+	delfos->setVelocity(f(0), -f(1), f(2), -f(3));
 }
 
 
