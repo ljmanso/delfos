@@ -26,6 +26,7 @@ public:
     Delfos();
     ~Delfos();
     void setVelocity(float x, float z, float angle);
+    void setVelocity(float V1, float V2, float V3, float V4);
 
 private:
     QMutex *mutex;

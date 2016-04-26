@@ -1,4 +1,4 @@
-#include "delfos.h"
+#include <delfos.h>
 
 #include <QMutexLocker>
 
@@ -6,7 +6,7 @@ Delfos::Delfos()
 {
     mutex = new QMutex(QMutex::Recursive);
     string response = "";
-    status = device.Connect("/dev/ttyUSB0");
+    status = device.Connect("/dev/ttyACM0");
 
     if(status != RQ_SUCCESS)
     {
@@ -24,7 +24,7 @@ Delfos::~Delfos()
 
 void Delfos::setVelocity(float LR, float FR, float VTheta)
 {
-	float wheelPermimeter = 2.*M_PI_2*76.2 // 76.2 it's the wheels' radius
+	float wheelPermimeter = 2.*M_PI_2*76.2; // 76.2 it's the wheels' radius
 	
 	LR /= wheelPermimeter;
 	FR /= wheelPermimeter;
@@ -67,6 +67,16 @@ void Delfos::setVelocity(float LR, float FR, float VTheta)
 	device.SetCommand(true, _GO, 1, V3);
 	device.SetCommand(true, _GO, 2, -V4);
 }
+
+
+void Delfos::setVelocity(float V1, float V2, float V3, float V4)
+{
+	device.SetCommand(false, _GO, 1, V1);
+	device.SetCommand(false, _GO, 2, V2);
+	device.SetCommand(true,  _GO, 1, V3);
+	device.SetCommand(true,  _GO, 2, V4);
+}
+
 
 
 

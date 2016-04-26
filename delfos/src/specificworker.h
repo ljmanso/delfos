@@ -51,13 +51,32 @@ public:
 	void stopBase();
 	void setSpeedBase(const float advx, const float advz, const float rot);
 
+
+
+private:
+	void setWheels(QVec wheelVels_);
+	void computeOdometry(bool forced=false);
+	float R, l1, l2;
+	QMat M_wheels_2_vels;
+	QMat M_vels_2_wheels;
+	// Odometry control
+	QVec wheelVels;
+	float angle, x, z;
+	float corrAngle, corrX, corrZ;
+	InnerModel *innermodel;
+	InnerModelTransform *backPose, *newPose;
+	InnerModelTransform *corrBackPose, *corrNewPose;
 public slots:
 	void compute();
 
 
 private:
 	Delfos *delfos;
+	double getElapsedSeconds(bool clear = false);
 };
 
 #endif
 
+
+
+	
